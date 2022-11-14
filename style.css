@@ -1,0 +1,85 @@
+* {
+    padding: 0;
+    margin: 0;
+
+    box-sizing: border-box;
+
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+.chat-container {
+    width: 80%;
+    height: 100vh;
+    background-color: #35383d;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* PARTE ONDE AS MENSAGENS SÃO EXIBIDAS */
+.chat-container .chat {
+    margin: 20px;
+    height: 90%;
+}
+
+.chat-container .chat .message .name {
+    color: #5ddfa2
+}
+
+.chat-container .chat .message p {
+    color: #c0c0c0
+}
+
+
+/* PARTE DE ENVIO DA MENSAGEM */
+.chat-container .send-message {
+    position: fixed;
+    bottom: 0;
+
+    width: 80%;
+    height: 10%;
+}
+
+.chat-container .send-message form {
+    height: 100%;
+
+}
+
+.chat-container .send-message form input {
+    width: 90%;
+    height: 100%;
+
+    padding: 4px 20px;
+
+    font-size: 1.1rem;
+    
+    background-color: #40454b;
+    color: #c0c0c0;
+
+    border-style: none;
+}
+
+.chat-container .send-message form input:focus {
+    outline: none;
+}
+
+.chat-container .send-message form button {
+    width: 10%;
+    height: 100%;
+}
+
+.users {
+    width: 20%;
+    height: 100vh;
+    background-color: #303136;
+}
