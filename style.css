@@ -30,6 +30,12 @@ main {
 .chat-container .chat {
     margin: 20px;
     height: 90%;
+
+    overflow-y: auto;
+}
+
+.chat-container .chat .message {
+    margin-bottom: 2%;
 }
 
 .chat-container .chat .message .name {
