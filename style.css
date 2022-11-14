@@ -80,8 +80,31 @@ main {
     height: 97%;
 }
 
+/* LISTA DOS USUÁRIOS DO CHAT */
 .users {
     width: 20%;
     height: 100vh;
     background-color: #303136;
+    color: #c0c0c0;
+
+    overflow-y: auto;
+
+    padding: 2%;
+}
+
+.users .user-online {
+    border-radius: 4px;
+    margin: 12px 0;
+    padding: 10px;
+
+    transition: background-color .3s ease, transform .3s ease;
+}
+
+.users .user-online:hover {
+    background-color: #40454b;
+    transform: translateY(-10%);
+}
+
+.users .user-online .username {
+    font-weight: 500;
 }
