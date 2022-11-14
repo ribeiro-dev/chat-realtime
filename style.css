@@ -23,6 +23,7 @@ main {
 
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 /* PARTE ONDE AS MENSAGENS SÃO EXIBIDAS */
