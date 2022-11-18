@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var socket = io("localhost:3000")
+    var socket = io("https://realtime-chaat.herokuapp.com/")
 
     function renderMessage(msg) {
         // função que vai renderizar a mensagem no chat
