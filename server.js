@@ -16,17 +16,32 @@ app.get("/", (req, res) => {
 
 // armazena as mensagens enviadas
 let messages = []
+let connectedUsers = []
 
 
 io.on("connection", socket => {
     console.log(`Socket conectado: ${socket.id}`)
+    connectedUsers.push(socket.id)
 
     socket.emit("previousMessages", messages)
+
+    // lida com as novas conexoes
+    socket.emit("connectedUsers", connectedUsers) // envia os usuarios pro client que se conectou agora
+    socket.broadcast.emit("connectedUsers", connectedUsers) // envia os usuarios pros ja conectados
 
     socket.on("sendMessage", data => {
         messages.push(data)
 
         socket.broadcast.emit("receivedMessage", data)
+    })
+
+    // remove o usuário da lista de usuários conectados
+    socket.on("disconnect", () => {
+        connectedUsers = connectedUsers.filter(item => item != socket.id)
+        console.log("user disconnected")
+        console.log(socket.id)
+        socket.broadcast.emit("connectedUsers", connectedUsers) // envia os usuarios pros ja conectados
+
     })
 })
 

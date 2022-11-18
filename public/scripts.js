@@ -13,11 +13,28 @@ $(document).ready(function(){
         `)
     }
 
+    function renderUser(user) {
+        $(".users").append(
+            `<div class="user-online">
+                <p class="username">${user}</p>
+            </div>`
+        )
+    }
+
     // faz o ouvinte pra receber as mensagens existentes ao logar no chat
     socket.on("previousMessages", oldMessages => {
         for (const message of oldMessages) {
             renderMessage(message)
         }
+    })
+
+    // faz o ouvinte pra receber os usuarios conectados
+    socket.on("connectedUsers", users => {
+        $(".users").html("<h2>Usuários no chat:</h2>")
+        for (const user of users) {
+            renderUser(user)
+        }
+        console.log(users)
     })
 
     // faz o ouvinte para receber uma nova mensagem
