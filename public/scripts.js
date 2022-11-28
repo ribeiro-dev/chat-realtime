@@ -1,6 +1,7 @@
 $(document).ready(function(){
     var socket = io("https://realtime-chaat.herokuapp.com/")
     // var socket = io("localhost:3000")
+    let username
 
     function renderMessage(msg) {
         // função que vai renderizar a mensagem no chat
@@ -70,7 +71,7 @@ $(document).ready(function(){
     $(".username-form").submit(event => {
         event.preventDefault()
 
-        let username = $("#username").val()
+        username = $("#username").val()
         console.log(username)
 
         //send username to server
