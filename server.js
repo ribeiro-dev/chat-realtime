@@ -21,13 +21,12 @@ let connectedUsers = []
 
 io.on("connection", socket => {
     console.log(`Socket conectado: ${socket.id}`)
-    connectedUsers.push(socket.id)
-
-    socket.emit("previousMessages", messages)
-
-    // lida com as novas conexoes
-    socket.emit("connectedUsers", connectedUsers) // envia os usuarios pro client que se conectou agora
-    socket.broadcast.emit("connectedUsers", connectedUsers) // envia os usuarios pros ja conectados
+    let newUser = {
+        id: socket.id,
+        username: socket.id
+    }
+    connectedUsers.push(newUser)
+    
 
     socket.on("sendMessage", data => {
         messages.push(data)
@@ -35,9 +34,23 @@ io.on("connection", socket => {
         socket.broadcast.emit("receivedMessage", data)
     })
 
+    socket.on("getUsername", userData => {
+        let socketIndex
+
+        connectedUsers.forEach((obj, index) => {if (obj.id == userData.id) socketIndex = index})
+        connectedUsers[socketIndex].username = userData.username
+
+        // lida com as novas conexoes
+        socket.emit("connectedUsers", connectedUsers) // envia os usuarios pro client que se conectou agora
+        socket.broadcast.emit("connectedUsers", connectedUsers) // envia os usuarios pros ja conectados
+
+        // envia as mensagens existentes do servidor
+        socket.emit("previousMessages", messages)
+    })
+
     // remove o usuário da lista de usuários conectados
     socket.on("disconnect", () => {
-        connectedUsers = connectedUsers.filter(item => item != socket.id)
+        connectedUsers = connectedUsers.filter(item => item.id != socket.id)
         console.log("user disconnected")
         console.log(socket.id)
         socket.broadcast.emit("connectedUsers", connectedUsers) // envia os usuarios pros ja conectados

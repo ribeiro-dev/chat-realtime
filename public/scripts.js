@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var socket = io("https://realtime-chaat.herokuapp.com/")
+    // var socket = io("localhost:3000")
 
     function renderMessage(msg) {
         // função que vai renderizar a mensagem no chat
@@ -16,7 +17,7 @@ $(document).ready(function(){
     function renderUser(user) {
         $(".users").append(
             `<div class="user-online">
-                <p class="username">${user}</p>
+                <p class="username">${user.username}</p>
             </div>`
         )
     }
@@ -42,15 +43,18 @@ $(document).ready(function(){
         renderMessage(message)
     })
 
+
+    // envio do formulário de mensagens
     $("#form").submit(event => {
         event.preventDefault()
 
-        // var author = $("input[name=username]").val()
-        var author = socket.id
+        var id = socket.id
+        var author = username
         var message = $("#input").val()
 
         if (author.length && message.length) {
             var messageObject = {
+                id: id,
                 author: author,
                 message: message
             }
@@ -60,5 +64,22 @@ $(document).ready(function(){
 
         socket.emit("sendMessage", messageObject)
         $("#form").trigger("reset")
+    })
+
+    // envio do formulario de username
+    $(".username-form").submit(event => {
+        event.preventDefault()
+
+        let username = $("#username").val()
+        console.log(username)
+
+        //send username to server
+        socket.emit("getUsername", {
+            id: socket.id,
+            username: username
+        })
+
+        //close modal
+        $(".modal").fadeOut("slow")
     })
   });

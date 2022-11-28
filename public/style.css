@@ -80,6 +80,7 @@ main {
     height: 97%;
 }
 
+
 /* LISTA DOS USUÁRIOS DO CHAT */
 .users {
     width: 20%;
@@ -107,4 +108,95 @@ main {
 
 .users .user-online .username {
     font-weight: 500;
+}
+
+
+/* Modal Username */
+.modal {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container {
+    width: 80%;
+    height: 40%;
+
+    color: #fff;
+    text-align: center;
+
+}
+
+.modal-container p {
+    font-size: 4rem;
+    margin-bottom: 80px;
+}
+
+.modal-container input {
+    width: 300px;
+    height: 32px;
+
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: white;
+    
+    color: white;
+    font-size: 1rem;
+
+    background-color: #000;
+    animation: blink-empty 1s infinite;
+    background-image: linear-gradient(white, white);
+    background-position: 1px  center;
+    background-repeat: no-repeat;
+    background-size:1px 1.2em;
+}
+
+.modal-container input:focus {
+    background-image:none;
+}
+
+.modal-container .btn-block {
+    width: 200px;
+    margin: 30px auto;
+    
+    background: linear-gradient(45deg,#4568dc,#b06ab3);
+    border-radius: 60px;
+
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    padding: 2px;
+
+    transition: box-shadow .5s ease;
+}
+
+.modal-container .btn-block:hover {
+    box-shadow: 1px 1px 26px rgba(255, 255, 255, 0.438);
+}
+
+.modal-container .btn-block button {
+    width: 200px;
+    background: black;
+    border-style: none;
+    border-radius: 60px;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+
+/* animacao pra deixa o cursor piscando mesmo sem foco no input
+https://stackoverflow.com/questions/41840340/html-input-blinking-caret-without-focus */
+@keyframes blink-empty {
+    25%, 75%{background-size:1px 1.2em;}
+    50% {background-size: 0 1.2em;}
 }

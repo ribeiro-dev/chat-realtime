@@ -10,9 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 
-    <!-- Importa o socket.io -->
-    <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
-    <!-- Importa o jQuery -->
+    <script src="https://cdn.socket.io/4.5.3/socket.io.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <title>Chat Real Time</title>
@@ -42,6 +40,20 @@
                 <p class="username">Usuário 1</p>
             </div> -->
         </section>
+
+        <div class="modal">
+            <div class="modal-container">
+                <p>Digite seu nome:</p>
+                <form class="username-form">
+                    <label for="username" style="display: none;">Nome</label>
+                    <input type="text" name="username" id="username">
+
+                    <div class="btn-block">
+                        <button type="submit">Entrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </main>
 
     <script src="scripts.js"></script>
