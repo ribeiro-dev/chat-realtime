@@ -1,6 +1,5 @@
 $(document).ready(function(){
-    var socket = io("https://realtime-chaat.herokuapp.com/")
-    // var socket = io("localhost:3000")
+    var socket = process.env.HOST
     let username
 
     function renderMessage(msg) {
