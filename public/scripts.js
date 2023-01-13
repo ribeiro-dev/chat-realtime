@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var socket = process.env.HOST
+    var socket = io("localhost:3000")
     let username
 
     function renderMessage(msg) {
@@ -64,6 +64,9 @@ $(document).ready(function(){
 
         socket.emit("sendMessage", messageObject)
         $("#form").trigger("reset")
+
+        // desce o scroll quando enviar a mensagem
+        document.querySelector(".chat").scrollBy(0, window.innerHeight)
     })
 
     // envio do formulario de username
