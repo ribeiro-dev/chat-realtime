@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    const URL = window.location.href
+    const URL = `${window.location.hostname}:3000`
     console.log(URL)
-    var socket = io("https://chaat-realtime.vercel.app/")
+    var socket = io(URL)
 
     function renderMessage(msg) {
         // função que vai renderizar a mensagem no chat
