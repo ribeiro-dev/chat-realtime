@@ -1,6 +1,5 @@
 $(document).ready(function(){
-    const URL = `${window.location.hostname}:3000`
-    console.log(URL)
+    const URL = window.location.href
     var socket = io(URL)
 
     function renderMessage(msg) {
