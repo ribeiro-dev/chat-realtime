@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    var socket = io("localhost:3000")
-    let username
+    const URL = window.location.href
+    var socket = io(URL)
 
     function renderMessage(msg) {
         // função que vai renderizar a mensagem no chat
