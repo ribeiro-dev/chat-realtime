@@ -43,6 +43,8 @@ $(document).ready(function(){
     // faz o ouvinte para receber uma nova mensagem
     socket.on("receivedMessage", message => {
         renderMessage(message)
+        // desce o scroll quando receber a mensagem
+        document.querySelector(".chat").scrollBy(0, window.innerHeight)
     })
 
 
