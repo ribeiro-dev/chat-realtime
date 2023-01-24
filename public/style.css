@@ -153,15 +153,6 @@ main {
     font-size: 1rem;
 
     background-color: #000;
-    animation: blink-empty 1s infinite;
-    background-image: linear-gradient(white, white);
-    background-position: 1px  center;
-    background-repeat: no-repeat;
-    background-size:1px 1.2em;
-}
-
-.modal-container input:focus {
-    background-image:none;
 }
 
 .modal-container .btn-block {
@@ -194,12 +185,4 @@ main {
     color: white;
 
     cursor: pointer;
-}
-
-
-/* animacao pra deixa o cursor piscando mesmo sem foco no input
-https://stackoverflow.com/questions/41840340/html-input-blinking-caret-without-focus */
-@keyframes blink-empty {
-    25%, 75%{background-size:1px 1.2em;}
-    50% {background-size: 0 1.2em;}
 }

@@ -2,6 +2,8 @@ $(document).ready(function(){
     const URL = window.location.href
     var socket = io(URL)
 
+    $("#username").focus()
+
     function renderMessage(msg) {
         // função que vai renderizar a mensagem no chat
         $(".chat").append(`
