@@ -1,17 +1,26 @@
 $(document).ready(function(){
     const URL = window.location.href
     var socket = io(URL)
+    let connectedUsers
 
     $("#username").focus()
 
     function renderMessage(msg) {
         // função que vai renderizar a mensagem no chat
+        const selectedUser = connectedUsers.find(user => user.username == msg.author)
+        const color = selectedUser.userColor
+        const datetime = msg.date//.toLocaleString("pt-BR")
+        const hour = datetime.toLocaleString("pt-BR", {hour: '2-digit', minute: '2-digit'})
+
         $(".chat").append(`
         <div class="message">
-            <p>
-                <strong class="name">${msg.author}</strong>:
-                ${msg.message}
-            </p>
+            <div class="info">
+                <span class="name" style="color: ${color}">${msg.author}:</span>
+                <span class="hour">${hour}</span>
+            </div>
+            <div>
+                <p class="content">${msg.message}</p>
+            </div>
         </div>
         `)
     }
@@ -19,7 +28,7 @@ $(document).ready(function(){
     function renderUser(user) {
         $(".users").append(
             `<div class="user-online">
-                <p class="username">${user.username}</p>
+                <p class="username" style="color:${user.userColor}">${user.username}</p>
             </div>`
         )
     }
@@ -38,6 +47,7 @@ $(document).ready(function(){
             renderUser(user)
         }
         console.log(users)
+        connectedUsers = users
     })
 
     // faz o ouvinte para receber uma nova mensagem
@@ -55,12 +65,14 @@ $(document).ready(function(){
         var id = socket.id
         var author = username
         var message = $("#input").val()
+        var date = new Date()
 
         if (author.length && message.length) {
             var messageObject = {
                 id: id,
                 author: author,
-                message: message
+                message: message,
+                date: date
             }
         }
 

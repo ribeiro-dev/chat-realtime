@@ -42,10 +42,16 @@ main {
 }
 
 .chat-container .chat .message .name {
-    color: #5ddfa2
+    font-weight: bolder;
+    font-size: 1.2em;
 }
 
-.chat-container .chat .message p {
+.chat-container .chat .message .hour {
+    color: #7e7e7e;
+    font-size: .7em;
+}
+
+.chat-container .chat .message .content {
     color: #c0c0c0;
 }
 
@@ -112,7 +118,7 @@ main {
 }
 
 .users .user-online .username {
-    font-weight: 500;
+    font-weight: bolder;
 }
 
 

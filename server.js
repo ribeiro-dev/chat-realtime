@@ -21,9 +21,12 @@ let connectedUsers = []
 
 io.on("connection", socket => {
     console.log(`Socket conectado: ${socket.id}`)
+    const userColor = Math.floor(Math.random()*16777215).toString(16);
+
     let newUser = {
         id: socket.id,
-        username: socket.id
+        username: socket.id,
+        userColor: '#' + userColor
     }
     connectedUsers.push(newUser)
     
