@@ -9,8 +9,8 @@ $(document).ready(function(){
         // função que vai renderizar a mensagem no chat
         const selectedUser = connectedUsers.find(user => user.username == msg.author)
         const color = selectedUser.userColor
-        const datetime = msg.date//.toLocaleString("pt-BR")
-        const hour = datetime.toLocaleString("pt-BR", {hour: '2-digit', minute: '2-digit'})
+        // const datetime = msg.date.toLocaleString("pt-BR")
+        const hour = new Date().toLocaleString("pt-BR", { hour: '2-digit', minute: '2-digit' })
 
         $(".chat").append(`
         <div class="message">
@@ -65,14 +65,14 @@ $(document).ready(function(){
         var id = socket.id
         var author = username
         var message = $("#input").val()
-        var date = new Date()
+        // var date = new Date()
 
         if (author.length && message.length) {
             var messageObject = {
                 id: id,
                 author: author,
                 message: message,
-                date: date
+                //date: date
             }
         }
 
@@ -90,7 +90,6 @@ $(document).ready(function(){
         event.preventDefault()
 
         username = $("#username").val()
-        console.log(username)
 
         //send username to server
         socket.emit("getUsername", {
