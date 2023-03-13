@@ -7,7 +7,7 @@ $(document).ready(function(){
 
     function renderMessage(msg) {
         // função que vai renderizar a mensagem no chat
-        const selectedUser = connectedUsers.find(user => user.username == msg.author)
+        const selectedUser = connectedUsers.find(user => user.username == msg.userName)
         const color = selectedUser.userColor
         // const datetime = msg.date.toLocaleString("pt-BR")
         const hour = new Date().toLocaleString("pt-BR", { hour: '2-digit', minute: '2-digit' })
@@ -15,11 +15,11 @@ $(document).ready(function(){
         $(".chat").append(`
         <div class="message">
             <div class="info">
-                <span class="name" style="color: ${color}">${msg.author}:</span>
+                <span class="name" style="color: ${color}">${msg.userName}:</span>
                 <span class="hour">${hour}</span>
             </div>
             <div>
-                <p class="content">${msg.message}</p>
+                <p class="content">${msg.content}</p>
             </div>
         </div>
         `)
@@ -35,6 +35,8 @@ $(document).ready(function(){
 
     // faz o ouvinte pra receber as mensagens existentes ao logar no chat
     socket.on("previousMessages", oldMessages => {
+
+        console.log(oldMessages)
         for (const message of oldMessages) {
             renderMessage(message)
         }

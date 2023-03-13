@@ -1,5 +1,7 @@
 const express = require("express")
 const path = require("path")
+const connection = require('./data/database')
+const Message = require('./data/Message')
 
 const app = express()
 const server = require("http").createServer(app)
@@ -14,12 +16,39 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"))
 })
 
+// Database
+connection.
+    authenticate()
+    .then(() => {
+        console.log('Conexão feita com o banco de dados')
+        
+        
+    })
+    .catch(msg => {
+        console.log(msg)
+    })
+
+// SELECT
+Message.findAll({
+    raw: true
+}).then(res => {
+    // console.log(Object.keys(res))
+    // console.log(res)
+    for (const msg of res) {
+        data = new Date(msg["createdAt"])
+        msg["localDate"] = new Date(msg["createdAt"])
+
+        // console.log(msg)
+        messages.push(msg)
+    }
+})
+
 // armazena as mensagens enviadas
 let messages = []
 let connectedUsers = []
 
 
-io.on("connection", socket => {
+io.on("connection", async socket => {
     console.log(`Socket conectado: ${socket.id}`)
     const userColor = Math.floor(Math.random()*16777215).toString(16);
 
