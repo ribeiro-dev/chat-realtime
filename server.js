@@ -38,7 +38,7 @@ Message.findAll({
         data = new Date(msg["createdAt"])
         msg["localDate"] = new Date(msg["createdAt"])
 
-        // console.log(msg)
+        console.log(msg)
         messages.push(msg)
     }
 })
@@ -48,20 +48,27 @@ let messages = []
 let connectedUsers = []
 
 
-io.on("connection", async socket => {
+io.on("connection", socket => {
     console.log(`Socket conectado: ${socket.id}`)
     const userColor = Math.floor(Math.random()*16777215).toString(16);
 
     let newUser = {
         id: socket.id,
-        username: socket.id,
+        userName: socket.id,
         userColor: '#' + userColor
     }
     connectedUsers.push(newUser)
     
 
-    socket.on("sendMessage", data => {
+    socket.on("sendMessage", async data => {
         messages.push(data)
+        const userColor = connectedUsers.find(user => user.userName == data.userName).userColor
+        console.log(data)
+        // await Message.create({
+        //     userName: data.userName,
+        //     userColor: userColor,
+        //     content: data.content
+        // })
 
         socket.broadcast.emit("receivedMessage", data)
     })
@@ -70,7 +77,7 @@ io.on("connection", async socket => {
         let socketIndex
 
         connectedUsers.forEach((obj, index) => {if (obj.id == userData.id) socketIndex = index})
-        connectedUsers[socketIndex].username = userData.username
+        connectedUsers[socketIndex].userName = userData.userName
 
         // lida com as novas conexoes
         socket.emit("connectedUsers", connectedUsers) // envia os usuarios pro client que se conectou agora

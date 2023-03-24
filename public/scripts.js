@@ -5,17 +5,20 @@ $(document).ready(function(){
 
     $("#username").focus()
 
-    function renderMessage(msg) {
+    function renderMessage(msg, getUserColor = true) {
         // função que vai renderizar a mensagem no chat
-        const selectedUser = connectedUsers.find(user => user.username == msg.userName)
-        const color = selectedUser.userColor
-        // const datetime = msg.date.toLocaleString("pt-BR")
-        const hour = new Date().toLocaleString("pt-BR", { hour: '2-digit', minute: '2-digit' })
+        if (getUserColor) {
+            const selectedUser = connectedUsers.find(user => user.userName == msg.userName)
+            const color = selectedUser.userColor
+            msg.userColor = color
+        }
 
+        const hour = new Date().toLocaleString("pt-BR", { hour: '2-digit', minute: '2-digit' })
+        console.log(msg)
         $(".chat").append(`
         <div class="message">
             <div class="info">
-                <span class="name" style="color: ${color}">${msg.userName}:</span>
+                <span class="name" style="color: ${msg.userColor}">${msg.userName}:</span>
                 <span class="hour">${hour}</span>
             </div>
             <div>
@@ -28,17 +31,16 @@ $(document).ready(function(){
     function renderUser(user) {
         $(".users").append(
             `<div class="user-online">
-                <p class="username" style="color:${user.userColor}">${user.username}</p>
+                <p class="username" style="color:${user.userColor}">${user.userName}</p>
             </div>`
         )
     }
 
     // faz o ouvinte pra receber as mensagens existentes ao logar no chat
     socket.on("previousMessages", oldMessages => {
-
         console.log(oldMessages)
         for (const message of oldMessages) {
-            renderMessage(message)
+            renderMessage(message, false)
         }
     })
 
@@ -65,15 +67,15 @@ $(document).ready(function(){
         event.preventDefault()
 
         var id = socket.id
-        var author = username
+        var author = userName
         var message = $("#input").val()
         // var date = new Date()
 
         if (author.length && message.length) {
             var messageObject = {
                 id: id,
-                author: author,
-                message: message,
+                userName: author,
+                content: message,
                 //date: date
             }
         }
@@ -91,12 +93,12 @@ $(document).ready(function(){
     $(".username-form").submit(event => {
         event.preventDefault()
 
-        username = $("#username").val()
+        userName = $("#username").val()
 
         //send username to server
         socket.emit("getUsername", {
             id: socket.id,
-            username: username
+            userName: userName
         })
 
         //close modal
