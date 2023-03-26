@@ -63,11 +63,11 @@ io.on("connection", socket => {
     socket.on("sendMessage", async data => {
         messages.push(data)
 
-        // await Message.create({
-        //     userName: data.userName,
-        //     userColor: data.userColor,
-        //     content: data.content
-        // })
+        await Message.create({
+            userName: data.userName,
+            userColor: data.userColor,
+            content: data.content
+        })
 
         socket.broadcast.emit("receivedMessage", data)
     })
