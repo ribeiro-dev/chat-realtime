@@ -35,8 +35,8 @@ Message.findAll({
     // console.log(Object.keys(res))
     // console.log(res)
     for (const msg of res) {
-        data = new Date(msg["createdAt"])
-        msg["localDate"] = new Date(msg["createdAt"])
+        // data = new Date(msg["createdAt"])
+        msg["createdAt"] = new Date(msg["createdAt"])
 
         console.log(msg)
         messages.push(msg)
@@ -62,11 +62,10 @@ io.on("connection", socket => {
 
     socket.on("sendMessage", async data => {
         messages.push(data)
-        const userColor = connectedUsers.find(user => user.userName == data.userName).userColor
-        console.log(data)
+
         // await Message.create({
         //     userName: data.userName,
-        //     userColor: userColor,
+        //     userColor: data.userColor,
         //     content: data.content
         // })
 

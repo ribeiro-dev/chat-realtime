@@ -13,13 +13,29 @@ $(document).ready(function(){
             msg.userColor = color
         }
 
-        const hour = new Date().toLocaleString("pt-BR", { hour: '2-digit', minute: '2-digit' })
-        console.log(msg)
+        // message not from database
+        if (!msg.createdAt) {
+            const hour = new Date().toLocaleString("pt-BR", { hour: '2-digit', minute: '2-digit' })
+
+            msg.createdAt = new Date().toJSON() //UTC
+        }
+
+
+        const convertedDate = (new Date(msg.createdAt)).toLocaleString("pt-BR", { 
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: '2-digit',
+            minute: '2-digit',
+        })
+
+        const localDate = {date, hour} = convertedDate.split(',')
+        msg.localDate = `${localDate.join(' ')}`
         $(".chat").append(`
         <div class="message">
             <div class="info">
                 <span class="name" style="color: ${msg.userColor}">${msg.userName}:</span>
-                <span class="hour">${hour}</span>
+                <span class="hour">${msg.localDate}:</span>
             </div>
             <div>
                 <p class="content">${msg.content}</p>
