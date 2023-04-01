@@ -2,7 +2,7 @@
 Esse é um projeto bem simples, feito para aprender um pouco sobre como usar WebSocket
 
 ![Página de Login](/imgs/login.png)
-![Página do chat](/imgs/chat.png)
+![Demonstração de uso do chat](/imgs/demo.gif)
 
 
 
