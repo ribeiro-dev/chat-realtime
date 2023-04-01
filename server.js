@@ -21,8 +21,19 @@ connection.
     authenticate()
     .then(() => {
         console.log('Conexão feita com o banco de dados')
-        
-        
+
+        // SELECT
+        Message.findAll({
+            raw: true
+        }).then(res => {
+            for (const msg of res) {
+                msg["createdAt"] = new Date(msg["createdAt"])
+
+                // console.log(msg)
+                messages.push(msg)
+            }
+        })
+
     })
     .catch(msg => {
         console.log(msg)
