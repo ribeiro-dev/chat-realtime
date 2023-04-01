@@ -15,8 +15,6 @@ $(document).ready(function(){
 
         // message not from database
         if (!msg.createdAt) {
-            const hour = new Date().toLocaleString("pt-BR", { hour: '2-digit', minute: '2-digit' })
-
             msg.createdAt = new Date().toJSON() //UTC
         }
 

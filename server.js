@@ -28,21 +28,6 @@ connection.
         console.log(msg)
     })
 
-// SELECT
-Message.findAll({
-    raw: true
-}).then(res => {
-    // console.log(Object.keys(res))
-    // console.log(res)
-    for (const msg of res) {
-        // data = new Date(msg["createdAt"])
-        msg["createdAt"] = new Date(msg["createdAt"])
-
-        console.log(msg)
-        messages.push(msg)
-    }
-})
-
 // armazena as mensagens enviadas
 let messages = []
 let connectedUsers = []
