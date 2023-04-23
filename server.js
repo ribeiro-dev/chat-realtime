@@ -71,7 +71,9 @@ io.on("connection", socket => {
     socket.on("getUsername", userData => {
         let socketIndex
 
-        connectedUsers.forEach((obj, index) => {if (obj.id == userData.id) socketIndex = index})
+        connectedUsers.forEach((obj, index) => {
+            if (obj.id == socket.id) socketIndex = index
+        })
         connectedUsers[socketIndex].userName = userData.userName
 
         // lida com as novas conexoes

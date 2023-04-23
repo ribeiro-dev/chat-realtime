@@ -1,6 +1,6 @@
 $(document).ready(function(){
     const URL = window.location.href
-    var socket = io(URL)
+    var socket = io(URL, {autoConnect: false})
     let connectedUsers
 
     $("#username").focus()
@@ -108,10 +108,10 @@ $(document).ready(function(){
         event.preventDefault()
 
         userName = $("#username").val()
+        socket.connect(URL)
 
         //send username to server
         socket.emit("getUsername", {
-            id: socket.id,
             userName: userName
         })
 
