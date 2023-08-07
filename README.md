@@ -1,5 +1,5 @@
 # Chat Realtime
-Esse é um projeto bem simples, feito para aprender um pouco sobre como usar WebSocket
+Esse foi um projeto feito com o intuito de praticar HTML/CSS/JS, mas principalmente, de aprender WebSockets.
 
 ![Página de Login](/imgs/login.png)
 ![Demonstração de uso do chat](/imgs/demo.gif)
@@ -9,7 +9,11 @@ Esse é um projeto bem simples, feito para aprender um pouco sobre como usar Web
 ___
 
 ## Como usar
+### Web:
+O projeto está disponível [aqui](https://chat-realtime-9h3k.onrender.com/) <br>
+*Obs: pode demorar mais de 1 minuto para o servidor iniciar*
 
+### Local:
 Requisitos:
 - NodeJS
 
